@@ -219,6 +219,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 initialSelection: _selectedSandwichType,
                 onSelected: _onSandwichTypeChanged,
                 dropdownMenuEntries: _buildSandwichTypeEntries(),
+                key: const Key('sandwich_type'),
               ),
               const SizedBox(height: 20),
               Row(
@@ -254,6 +255,7 @@ class _OrderScreenState extends State<OrderScreen> {
                   IconButton(
                     onPressed: _increaseQuantity,
                     icon: const Icon(Icons.add),
+                    key: const Key('add_sandwich'),
                   ),
                 ],
               ),
@@ -262,6 +264,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 onPressed: _getAddToCartCallback(),
                 icon: Icons.add_shopping_cart,
                 label: 'Add to Cart',
+                key: const Key('add_cart'),
                 backgroundColor: Colors.green,
               ),
               const SizedBox(height: 20),
