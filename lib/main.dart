@@ -74,7 +74,13 @@ class _OrderScreenState extends State<OrderScreen> {
       String confirmationMessage =
           'Added $_quantity $sizeText ${sandwich.name} sandwich(es) on ${_selectedBreadType.name} bread to cart';
 
-      debugPrint(confirmationMessage);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(confirmationMessage),
+          duration: const Duration(seconds: 2), // popup stays 2 seconds
+          behavior: SnackBarBehavior.floating,   // optional: floating style
+        ),
+      );
     }
   }
 
@@ -182,10 +188,13 @@ class _OrderScreenState extends State<OrderScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(
-                height: 300,
+                height: 150,
+                width: 150,
                 child: Image.asset(
                   _getCurrentImagePath(),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.contain,
+                  height: 120,
+                  width: 120,
                   errorBuilder: (context, error, stackTrace) {
                     return const Center(
                       child: Text(
