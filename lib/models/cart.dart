@@ -1,17 +1,19 @@
 
+import 'dart:core';
+
 import 'package:sandwich_shop/models/sandwich.dart';
 import 'package:sandwich_shop/repositories/pricing_repository.dart';
 
 
 class Cart {
-  List<Sandwich> sandwiches = List<Sandwich>.empty(growable: true);
+  List<CartItem> sandwiches = List<CartItem>.empty(growable: true);
   String notes = '';
 
-  void addSandwich(Sandwich sandwich) {
-    sandwiches.add(sandwich);
+  void addSandwich({required Sandwich sandwich, required int quantity}) {
+    sandwiches.add(CartItem(sandwich: sandwich, quantity: quantity));
   }
 
-  void addNote(String note) {
+  void addNote({required String note}) {
     notes = '$notes\n$note';
   }
 
@@ -20,11 +22,22 @@ class Cart {
     notes = '';
   }
 
-  double calculatePriceForCart({required List<Sandwich> sandwiches}) {
+  double calculatePriceForCart() {
     double price = 0;
-    for (Sandwich sandwich in sandwiches) {
-      price += PricingRepository().calculatePrice(quantity: 1, isFootlong: sandwich.isFootlong);
+    for (CartItem item in sandwiches) {
+      price += PricingRepository().calculatePrice(quantity: item.quantity, isFootlong: item.sandwich.isFootlong);
     }
     return price;
   }
+
+
+}
+class CartItem {
+  final Sandwich sandwich;
+  final int quantity;
+
+  const CartItem({
+    required this.sandwich,
+    required this.quantity
+  });
 }
