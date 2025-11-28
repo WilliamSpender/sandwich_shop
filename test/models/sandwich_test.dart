@@ -19,12 +19,12 @@ void main() {
       final sandwich = Sandwich(
         type: SandwichType.tunaMelt,
         isFootlong: true,
-        breadType: BreadType.wheat,
+        breadType: BreadType.wholemeal,
       );
 
       expect(sandwich.name, 'Tuna Melt');
       expect(sandwich.image, 'assets/images/tunaMelt_footlong.png');
-      expect(sandwich.breadType, BreadType.wheat);
+      expect(sandwich.breadType, BreadType.wholemeal);
     });
   });
 }
