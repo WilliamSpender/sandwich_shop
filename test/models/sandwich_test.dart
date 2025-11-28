@@ -18,12 +18,12 @@ void main() {
     test('creates a sandwich with correct properties', () {
       final sandwich = Sandwich(
         type: SandwichType.tunaMelt,
-        isFootlong: true,
+        isFootlong: false,
         breadType: BreadType.wholemeal,
       );
 
       expect(sandwich.name, 'Tuna Melt');
-      expect(sandwich.image, 'assets/images/tunaMelt_footlong.png');
+      expect(sandwich.image, 'assets/images/tunaMelt_six_inch.png');
       expect(sandwich.breadType, BreadType.wholemeal);
     });
   });
