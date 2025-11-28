@@ -30,6 +30,26 @@ class Cart {
     return price;
   }
 
+  String summary() {
+    final buffer = StringBuffer();
+
+    if (sandwiches.isEmpty) {
+      buffer.writeln('No items in cart.');
+    } else {
+      for (final item in sandwiches) {
+        final s = item.sandwich;
+        final size = s.isFootlong ? 'footlong' : 'six-inch';
+        buffer.writeln('${item.quantity}  ${s.name} $size');
+      }
+    }
+
+    buffer.writeln('');
+    buffer.writeln('Notes: $notes');
+    buffer.writeln('');
+    buffer.writeln('TotalPrice: \$${calculatePriceForCart()}');
+
+    return buffer.toString();
+  }
 
 }
 class CartItem {
