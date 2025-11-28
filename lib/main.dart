@@ -33,6 +33,8 @@ class OrderScreen extends StatefulWidget {
 class _OrderScreenState extends State<OrderScreen> {
   final Cart _cart = Cart();
   final TextEditingController _notesController = TextEditingController();
+  final TextEditingController _summaryController = TextEditingController();
+
 
   SandwichType _selectedSandwichType = SandwichType.veggieDelight;
   bool _isFootlong = true;
@@ -45,11 +47,13 @@ class _OrderScreenState extends State<OrderScreen> {
     _notesController.addListener(() {
       setState(() {});
     });
+    _summaryController.text = _cart.summary();
   }
 
   @override
   void dispose() {
     _notesController.dispose();
+    _summaryController.dispose();
     super.dispose();
   }
 
@@ -81,6 +85,8 @@ class _OrderScreenState extends State<OrderScreen> {
           behavior: SnackBarBehavior.floating,   // optional: floating style
         ),
       );
+
+      _summaryController.text = _cart.summary();
     }
   }
 
@@ -257,6 +263,20 @@ class _OrderScreenState extends State<OrderScreen> {
                 icon: Icons.add_shopping_cart,
                 label: 'Add to Cart',
                 backgroundColor: Colors.green,
+              ),
+              const SizedBox(height: 20),
+
+              const SizedBox(height: 20),
+              TextField(
+                controller: _summaryController,
+                readOnly: true,
+                minLines: 4,
+                maxLines: null, // allow expanding
+                decoration: const InputDecoration(
+                  labelText: 'Cart Summary',
+                  border: OutlineInputBorder(),
+                  contentPadding: EdgeInsets.all(12),
+                ),
               ),
               const SizedBox(height: 20),
             ],
